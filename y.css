@@ -1,0 +1,24 @@
+.cell {
+    border: 2px solid;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 70px;
+    cursor: crosshair;
+}
+
+table {
+    border-collapse: collapse;
+    position: absolute;
+    left: 50%;
+    margin-left: -155px;
+    top: 50px;
+}
+
+button {
+    position: relative;
+    left: 50%;
+    margin-left: -155px;
+    top: 400px;
+}
