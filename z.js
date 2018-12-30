@@ -1,6 +1,6 @@
 // Setting up variables
 
-var origBoard //Will be an array to keep track of what selection is in each box (X, O, null)
+var scoreTrack //Will be an array to keep track of what selection is in each box (X, O, null)
 const PC = 'X'
 const NPC = 'O'
 const vCombo = [
@@ -15,17 +15,17 @@ startGame();
 function startGame() {
     document.querySelector(".endgame").getElementsByClassName.display = "none"
     //We grab the endgame modal once we reset the game and reset display to none.
-    origBoard = Array.from(Array(9).keys());
-    console.log(origBoard)
-    //This creates an array of 9 elements
-
-    for (let x; x < cells.length; x++) {
+    scoreTrack = Array.from(Array(9).keys());
+    console.log(scoreTrack)
+    //This creates an array of 9 elements. This is the score tracker
+    for (let x = 0; x < cells.length; x++) {
+        console.log('-X-')
         //Now we create a loop to perform actions on all the cells...
-        cells[i].innerText = ''
+        cells[x].innerText = ''
         //...reset the boxes to nothing
-        cells[i].style.removeProperty('background-color');
+        cells[x].style.removeProperty('background-color');
         //....reset the background color of each square (chosen squares will be highlighted upon victory)
-        cells[i].addEventListener('click', turnClick, false)
+        cells[x].addEventListener('click', turnClick, false)
         //.....add a click function called turnClick to each square
     }
 }
