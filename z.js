@@ -31,5 +31,11 @@ function startGame() {
 }
 
 function turnClick(square) {
-    console.log(square.target.id)
+    // console.log(square.target.id)
+    turn(square.target.id, PC)
+}
+
+function turn(x, PC) {
+    scoreTrack[x] = PC
+    document.getElementById(x).innerText = PC
 }
