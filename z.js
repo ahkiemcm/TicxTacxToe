@@ -13,7 +13,7 @@ const cells = document.querySelectorAll('.cell');
 startGame(); //Initiates the game upon load
 
 function startGame() {
-    document.querySelector(".endgame").getElementsByClassName.display = "none"
+    document.querySelector(".endgame").style.display = "none"
     //We grab the endgame modal once we reset the game and reset display to none.
     scoreTrack = Array.from(Array(9).keys());
     console.log(scoreTrack)
@@ -31,8 +31,10 @@ function startGame() {
 }
 
 function turnClick(square) {
-    // console.log(square.target.id)
     turn(square.target.id, PC)
+    //Run the turn function that handles cell click and point tally for each PC/AI turn
+    if (!checkTie()) turn(bestSpot(), AI)
+    //Check for a tie
 }
 
 function turn(squareId, player) {
@@ -58,10 +60,40 @@ function checkWin(board, player) {
 function gameOver(victory) {
     for (let index of vCombos[victory.index]) {
         document.getElementById(index).style.backgroundColor =
-            victory.player == PC ? "blue" : "red"
+            victory.player == PC ? "red" : "blue"
     }
 
     for (let x = 0; x < cells.length; x++) {
         cells[x].removeEventListener('click', turnClick, false)
     }
+    declareWinner(victory.player == PC ? "VICTORY!" : "DEFEAT...")
+}
+
+function declareWinner(winner) {
+    document.querySelector(".endgame").style.display = "block"
+    document.querySelector(".endtext").innerHTML = winner
+}
+
+
+function emptySquares() {
+    return scoreTrack.filter(s => typeof s == 'number')
+    //filter every element in the scoreTrack array
+    //Check each element for unselected cells
+}
+
+function bestSpot() {
+    //With this function we will be deciding the best move for the AI to make against the player.
+    return emptySquares()[0]
+}
+
+function checkTie() {
+    if (emptySquares().length == 0) {
+        for (let x; x < cells.length; x++) {
+            cells[x].style.backgroundColor = 'green';
+            cells[x].removeEventListener('click', turnClick, false)
+        }
+        declareWinner("CAT SCRATCH!")
+        return true;
+    }
+    return false;
 }
